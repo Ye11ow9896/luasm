@@ -1,0 +1,122 @@
+######## Text operation #######
+
+# Цвет текста:
+BLACK='\033[0;30m'      #  ${BLACK}    # чёрный цвет знаков
+RED='\033[0;31m'        #  ${RED}      # красный цвет знаков
+GREEN='\033[0;32m'      #  ${GREEN}    # зелёный цвет знаков
+YELLOW='\033[0;33m'     #  ${YELLOW}   # желтый цвет знаков
+BLUE='\033[0;34m'       #  ${BLUE}     # синий цвет знаков
+MAGENTA='\033[0;35m'    #  ${MAGENTA}  # фиолетовый цвет знаков
+CYAN='\033[0;36m'       #  ${CYAN}     # цвет морской волны знаков
+GRAY='\033[0;37m'       #  ${GRAY}     # серый цвет знаков
+NORMAL='\033[0m'        #  ${NORMAL}   # все атрибуты по умолчанию
+
+# Команды:                                                              
+CHECK_INTERNET_CON=`ping 8.8.8.8 -c 1 -W 2 | grep " 1 received"`                #  ${CHECK_INTERNET_CON} # если выводит строку - инет есть, если строки нет - интернета тоже нет
+# Klipper app cmd
+KLIPPER_DIR=`grep "klipper_dir" luasm.conf.txt | cut -d ' ' -f 2`                #  ${KLIPPER_DIR}
+KLIPPER_REPO=`grep "klipper_repo" luasm.conf.txt | cut -d ' ' -f 2`              #  ${KLIPPER_REPO}
+# KlipperScreen app cmd
+KSCREEN_DIR=`grep "kscreen_dir" luasm.conf.txt | cut -d ' ' -f 2`                #  ${KSCREEN_DIR}
+KSCREEN_REPO=`grep "kscreen_repo" luasm.conf.txt | cut -d ' ' -f 2`              #  ${KSCREEN_REPO}
+# Fluid app cmd
+FLUIDD_DIR=`grep "fluidd_dir" luasm.conf.txt | cut -d ' ' -f 2`                  #  ${FLUIDD_DIR}
+FLUIDD_REPO=`grep "fluidd_repo" luasm.conf.txt | cut -d ' ' -f 2`                #  ${FLUIDD_REPO} 
+FLUIDD_SRC_FOLDER="fluidd_src"                                                  #  ${FLUIDD_SRC_FOLDER}
+
+SETUP_FOLDER_NAME=`grep "setup_folder_name" luasm.conf.txt | cut -d ' ' -f 2`    #  ${SETUP_FOLDER_NAME}
+REPO_PATH=`grep "repo_path" luasm.conf.txt | cut -d ' ' -f 2`                    #  ${REPO_PATH}
+UPDATE_REPO_NAME=`grep "update_repo_name" luasm.conf.txt | cut -d ' ' -f 2`      #  ${UPDATE_REPO_NAME}
+
+# Variables
+True=1
+False=0
+# screens
+
+menu_head() {
+    echo -en " \n "
+    echo -en          "${NORMAL}   +${BLACK}================${NORMAL}{UPDATE AND INSTALL MANAGER}${BLACK}=============${NORMAL}+  \n"
+    echo -en "${CYAN}    |=========================================================|      \n"
+    echo -en          "    |                                       |${NORMAL}#################${CYAN}|      \n"
+    echo -en          "    |    ####   ####   ####   ####   #  #   |${NORMAL}#${BLUE}LARETS${NORMAL}##${BLUE}LARET${NORMAL}###${CYAN}|      \n"
+    echo -en          "    |    #  #   #  #   #  #   #      #  #   |${NORMAL}####${BLUE}SLA${NORMAL}##${BLUE}RE${NORMAL}##${BLUE}TS${NORMAL}##${CYAN}|      \n"
+    echo -en          "    |    #  #   #  #   ####   ###    #  #   |${NORMAL}##${BLUE}LARET${NORMAL}##${BLUE}SL${NORMAL}###${BLUE}AR${NORMAL}#${CYAN}|      \n"
+    echo -en          "    |    #  #   ####   #      #      ####   |${RED}####${BLUE}ETS${RED}##${BLUE}LA${RED}##${BLUE}RE${RED}##${CYAN}|      \n"
+    echo -en          "    |   #   #   #  #   #      ####      ##  |${RED}#${BLUE}TSLARE${RED}##${BLUE}TSLAR${RED}###${CYAN}|      \n"
+    echo -en          "    |                                       |${RED}#################${CYAN}|      \n"
+    echo -en          "    ${CYAN}|=========================================================| \n"
+    
+}
+
+# common funcs
+choise() {
+    if [ "$1" == "exit" ]; then
+        echo -en "    > ${RED}Goodbye! \n"
+    elif [ "$1" == "install_menu" ]; then
+        clear
+        go_to_screen $1
+    elif [ "$1" == "install" ]; then
+        clear
+        install
+    elif [ "$1" == "update_menu" ]; then
+        clear
+        go_to_screen update_menu
+    elif [ "$1" == "update" ]; then
+        clear
+        update
+    elif [ "$1" == "delete_menu" ]; then
+        clear
+        go_to_screen delete_menu
+    elif [ "$1" == "delete" ]; then
+        clear
+        delete
+    elif [ "$1" == "error" ]; then
+        clear
+        echo -en "     ${RED}Input error! \n"
+        menu_head
+        $2
+    elif [ "$1" == "back" ]; then
+        clear
+        go_to_screen $2
+    fi
+}  
+
+go_to_screen() {
+    cd /${HOME}/luasm
+    ./$1.sh
+}
+
+# funcs 
+check_connection() {
+    STATUS=${CHECK_INTERNET_CON}
+    if [[ -z "$STATUS" ]]; then
+        echo $(($False))
+    else
+        echo $(($True))
+    fi
+}
+
+is_folder_created() {
+    cd /home/${USER}
+    if [ -d "$1" ]; then
+        echo $((${True}))
+    else
+        echo $((${False}))
+    fi
+}
+
+is_new_version() {
+    cd /home/${USER}/${SETUP_FOLDER_NAME}/${UPDATE_REPO_NAME};
+    git fetch origin
+    local stat=`git status`
+    local origin=$(git rev-parse --short=8 origin/master)
+    local head=$(git rev-parse --short=8 HEAD)
+    if [ "${origin}" != "${head}" ]; then
+        echo $((${False}))  # You have old version
+    else
+        echo $((${True}))   # You have a new version
+    fi
+
+
+}
+

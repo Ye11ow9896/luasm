@@ -1,0 +1,14 @@
+
+# Название папки куда будет установлено ПО Klipper
+klipper_dir: klipper
+# Репозиторий, откуда скачиваем ПО Klipper
+klipper_repo: https://github.com/Ye11ow9896/klipper
+# Название папки куда будет установлено ПО KlipperScreen
+kscreen_dir: KlipperScreen
+# Репозиторий, откуда скачиваем ПО KlipperScreen
+kscreen_repo: https://github.com/Ye11ow9896/KlipperScreen
+# Название папки куда будет установлено ПО Fluidd
+fluidd_dir: fluidd
+# Репозиторий, откуда скачиваем ПО Fluidd
+fluidd_repo: https://github.com/Ye11ow9896/Fluidd
+
