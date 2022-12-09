@@ -3,7 +3,7 @@ source ./lib
 
 #
 #Get_my_path=`pwd`
-SETUP_FOLDER_NAME=`grep "setup_folder_name" doup.conf.txt | cut -d ' ' -f 2`
+#SETUP_FOLDER_NAME=`grep "setup_folder_name" doup.conf.txt | cut -d ' ' -f 2`
 #SETUP_PATH=`grep "setup_path" doup.conf.txt | cut -d ' ' -f 2`
 #REPO_PATH=`grep "repo_path" doup.conf.txt | cut -d ' ' -f 2`
 #
@@ -26,22 +26,32 @@ SETUP_FOLDER_NAME=`grep "setup_folder_name" doup.conf.txt | cut -d ' ' -f 2`
 #    echo "ne ravni"
 #else
 #    echo "ravni"
-#fi
-
-install() {
+##fi
+#
+#install() {
+#    cd /${HOME}
+#    # create temp folder
+#    c_folder=$(is_folder_created $2)
+#    if [ "$c_folder" -eq "1" ]; then
+#        rm -rf $2;
+#    fi
+#    mkdir $2;
+#    cd $2;
+#    git clone $1;
+#    rm -rf /${HOME}/fluidd/*
+#    cp -r /${HOME}/${FLUIDD_SRC_FOLDER}/Fluidd/dist/* /${HOME}/fluidd
+#    rm -rf /${HOME}/${FLUIDD_SRC_FOLDER}
+#}
+#
+#install ${FLUIDD_REPO} ${FLUIDD_SRC_FOLDER} ${FLUIDD_DIR}
+#
+inst() {
     cd /${HOME}
-    # create temp folder
-    c_folder=$(is_folder_created $2)
-    if [ "$c_folder" -eq "1" ]; then
-        rm -rf $2;
+    if [ -d "$1" ]; then
+        echo "$1 exist"
+    else
+        echo "$1 not exist"
     fi
-    mkdir $2;
-    cd $2;
-    git clone $1;
-    rm -rf /${HOME}/fluidd/*
-    cp -r /${HOME}/${FLUIDD_SRC_FOLDER}/Fluidd/dist/* /${HOME}/fluidd
-    rm -rf /${HOME}/${FLUIDD_SRC_FOLDER}
 }
 
-install ${FLUIDD_REPO} ${FLUIDD_SRC_FOLDER} ${FLUIDD_DIR}
-
+inst ${KLIPPER_DIR}

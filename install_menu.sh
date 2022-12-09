@@ -52,7 +52,11 @@ install_app() {
 install_software() {
     cd /${HOME}
     if [ -z $2 ]; then  #setup klipper and klipperScreen
-        git clone $1
+        if [ -d "$1" ]; then
+            echo -en "${GREEN}$1 directory already exists! \n"
+        else
+            git clone $1
+        fi
     else                # setup fluidd
         cd /${HOME}
         # create temp folder
