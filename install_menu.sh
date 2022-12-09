@@ -37,7 +37,7 @@ install_app() {
     # go to main user folder
     cd /home/$USER; 
     # check all folders
-    if [ "$(is_folder_created ${KLIPPER_DIR})" -eq "1" ] && [ "$(is_folder_created ${KSCREEN_DIR})" -eq "1" ] && [ "$(is_folder_created ${FLUIDD_DIR})" -eq "1"]
+    if [ "$(is_folder_created ${KLIPPER_DIR})" -eq "1" ] && [ "$(is_folder_created ${KSCREEN_DIR})" -eq "1" ] && [ "$(is_folder_created ${FLUIDD_DIR})" -eq "1" ]
     then 
         clear
         echo -en "     ${GREEN}Larets3D software already installed! \n"
