@@ -56,7 +56,7 @@ install_software() {
     else                # setup fluidd
         cd /${HOME}
         # create temp folder
-        c_folder=$(is_folder_create "temp")
+        c_folder=$(is_folder_created "temp")
         if [ "$c_folder" -eq "1"]; then
             rm -rf temp;
         fi
