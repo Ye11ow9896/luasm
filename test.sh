@@ -45,13 +45,21 @@ source ./lib
 #
 #install ${FLUIDD_REPO} ${FLUIDD_SRC_FOLDER} ${FLUIDD_DIR}
 #
-inst() {
+
+update() {
     cd /${HOME}
-    if [ -d "$1" ]; then
-        echo "$1 exist"
-    else
-        echo "$1 not exist"
+    # create temp folder
+    c_folder=$(is_folder_created "temp")
+    if [ "$c_folder" -eq "1" ]; then
+        rm -rf temp;
     fi
+    mkdir temp;
+    mkdir $2
+    cd temp;
+    git clone $1;
+    cp -r /${HOME}/temp/Fluidd/dist/* /${HOME}/$2
+    cp -r /${HOME}/temp/Fluidd/.git /${HOME}/$2
+    rm -rf /${HOME}/temp
 }
 
-inst ${KLIPPER_DIR}
+update ${FLUIDD_REPO} ${FLUIDD_DIR}

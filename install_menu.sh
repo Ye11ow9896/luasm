@@ -46,6 +46,9 @@ install_app() {
         install_software ${KLIPPER_REPO}
         install_software ${KSCREEN_REPO}
         install_software ${FLUIDD_REPO} ${FLUIDD_DIR}
+        clear
+        echo -en "     ${GREEN}Larets3D software successfully installed! \n"
+        go_to_screen main
     fi 
 }
 
@@ -61,7 +64,7 @@ install_software() {
         cd /${HOME}
         # create temp folder
         c_folder=$(is_folder_created "temp")
-        if [ "$c_folder" -eq "1"]; then
+        if [ "$c_folder" -eq "1" ]; then
             rm -rf temp;
         fi
         mkdir temp;
@@ -69,6 +72,7 @@ install_software() {
         cd temp;
         git clone $1;
         cp -r /${HOME}/temp/Fluidd/dist/* /${HOME}/$2
+        cp -r /${HOME}/temp/Fluidd/.git /${HOME}/$2
         rm -rf /${HOME}/temp
     fi
 }
