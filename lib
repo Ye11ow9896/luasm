@@ -12,7 +12,7 @@ GRAY='\033[0;37m'       #  ${GRAY}     # серый цвет знаков
 NORMAL='\033[0m'        #  ${NORMAL}   # все атрибуты по умолчанию
 
 # Команды:                                                              
-CHECK_INTERNET_CON=`ping 8.8.8.8 -c 1 -W 2 | grep " 1 received"`                #  ${CHECK_INTERNET_CON} # если выводит строку - инет есть, если строки нет - интернета тоже нет
+CHECK_INTERNET_CON=`ping 8.8.8.8 -c 1 -W 2 | grep " 1 received"`                 #  ${CHECK_INTERNET_CON} # если выводит строку - инет есть, если строки нет - интернета тоже нет
 # Klipper app cmd
 KLIPPER_DIR=`grep "klipper_dir" luasm.conf.txt | cut -d ' ' -f 2`                #  ${KLIPPER_DIR}
 KLIPPER_REPO=`grep "klipper_repo" luasm.conf.txt | cut -d ' ' -f 2`              #  ${KLIPPER_REPO}
@@ -22,12 +22,7 @@ KSCREEN_REPO=`grep "kscreen_repo" luasm.conf.txt | cut -d ' ' -f 2`             
 # Fluid app cmd
 FLUIDD_DIR=`grep "fluidd_dir" luasm.conf.txt | cut -d ' ' -f 2`                  #  ${FLUIDD_DIR}
 FLUIDD_REPO=`grep "fluidd_repo" luasm.conf.txt | cut -d ' ' -f 2`                #  ${FLUIDD_REPO} 
-FLUIDD_SRC_FOLDER="fluidd_src"                                                  #  ${FLUIDD_SRC_FOLDER}
-
-#git commands for update
-GIT_STATUS=$(git status)
-GIT_ORIGIN=$(git rev-parse --short=8 origin/master)
-GIT_HEAD=$(git rev-parse --short=8 HEAD)
+FLUIDD_SRC_FOLDER="fluidd_src"                                                   #  ${FLUIDD_SRC_FOLDER}
 
 SETUP_FOLDER_NAME=`grep "setup_folder_name" luasm.conf.txt | cut -d ' ' -f 2`    #  ${SETUP_FOLDER_NAME}
 REPO_PATH=`grep "repo_path" luasm.conf.txt | cut -d ' ' -f 2`                    #  ${REPO_PATH}

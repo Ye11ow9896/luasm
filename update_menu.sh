@@ -1,6 +1,6 @@
 #!/bin/bash
 source ./lib
-set -e
+set -x
 
 update_menu() {
     echo -en          "    ${CYAN}|=======================${NORMAL}{UPDATE MENU}${CYAN}=====================| \n"
@@ -44,23 +44,24 @@ update_app() {
             # all folders with apps are exists
             update_software ${KLIPPER_DIR}
             update_software ${KSCREEN_DIR}
-            update_software ${FLUIDD_DIR} ${FLUIDD_DIR}
-            clear
+            update_software ${FLUIDD_REPO} ${FLUIDD_DIR}
+            #clear
             echo -en "     ${GREEN}Larets3D software successfully updated! \n"
             go_to_screen main
         else
-            clear
+            #clear
             echo -en "     ${GREEN}You have already lestest version! \n"
             go_to_screen main    
         fi        
     else  
-        clear
+        #clear
         echo -en "     ${GREEN}Larets3D software not installed! \n"
         go_to_screen main
     fi 
 }
 
 update_software() {
+
     if [ "$(is_new_version $1)" -eq "1" ]; then
         if [ -z $2 ]; then
             # update klipper and klipperScreen
@@ -68,10 +69,9 @@ update_software() {
             git pull
         else 
             # update Fluidd
-            cd /${HOME}/$1
             c_folder=$(is_folder_created "temp")
             if [ "$(is_folder_created "temp")" -eq "1" ]; then
-                rm -rf temp;
+                rm -rf /${HOME}/temp;
             fi
             mkdir temp;
             mkdir $2
@@ -89,7 +89,9 @@ update_software() {
 is_new_version() {
     cd /${HOME}/$1;
     git fetch origin;
-    if [ "${GIT_HEAD}" != "${GIT_ORIGIN}" ]; then
+    local origin=$(git rev-parse --short=8 origin/master)
+    local head=$(git rev-parse --short=8 HEAD)
+    if [ "${origin}" != "${head}" ]; then
         echo $((${True}))
     else 
         echo $((${False}))
