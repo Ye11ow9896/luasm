@@ -1,6 +1,6 @@
 #!/bin/bash
 source ./lib
-set -x
+set -e
 
 update_menu() {
     echo -en          "    ${CYAN}|=======================${NORMAL}{UPDATE MENU}${CYAN}=====================| \n"
