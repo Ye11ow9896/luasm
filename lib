@@ -1,5 +1,7 @@
 ######## Text operation #######
 
+set -e
+
 # Цвет текста:
 BLACK='\033[0;30m'      #  ${BLACK}    # чёрный цвет знаков
 RED='\033[0;31m'        #  ${RED}      # красный цвет знаков
@@ -24,9 +26,9 @@ FLUIDD_DIR=`grep "fluidd_dir" luasm.conf.txt | cut -d ' ' -f 2`                 
 FLUIDD_REPO=`grep "fluidd_repo" luasm.conf.txt | cut -d ' ' -f 2`                #  ${FLUIDD_REPO} 
 FLUIDD_SRC_FOLDER="fluidd_src"                                                   #  ${FLUIDD_SRC_FOLDER}
 
-SETUP_FOLDER_NAME=`grep "setup_folder_name" luasm.conf.txt | cut -d ' ' -f 2`    #  ${SETUP_FOLDER_NAME}
-REPO_PATH=`grep "repo_path" luasm.conf.txt | cut -d ' ' -f 2`                    #  ${REPO_PATH}
-UPDATE_REPO_NAME=`grep "update_repo_name" luasm.conf.txt | cut -d ' ' -f 2`      #  ${UPDATE_REPO_NAME}
+LUASM_DIR="luasm"
+
+
 
 # Variables
 True=1
@@ -82,8 +84,10 @@ choise() {
 }  
 
 go_to_screen() {
+
     cd /${HOME}/luasm
     ./$1.sh
+    
 }
 
 # funcs 
@@ -101,6 +105,18 @@ is_folder_created() {
     if [ -d "$1" ]; then
         echo $((${True}))
     else
+        echo $((${False}))
+    fi
+}
+
+is_new_version() {
+    cd /${HOME}/$1;
+    git fetch origin;
+    local origin=$(git rev-parse --short=8 origin/master)
+    local head=$(git rev-parse --short=8 HEAD)
+    if [ "${origin}" != "${head}" ]; then
+        echo $((${True}))
+    else 
         echo $((${False}))
     fi
 }

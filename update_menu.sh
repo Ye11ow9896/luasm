@@ -86,17 +86,6 @@ update_software() {
     fi
 }
 
-is_new_version() {
-    cd /${HOME}/$1;
-    git fetch origin;
-    local origin=$(git rev-parse --short=8 origin/master)
-    local head=$(git rev-parse --short=8 HEAD)
-    if [ "${origin}" != "${head}" ]; then
-        echo $((${True}))
-    else 
-        echo $((${False}))
-    fi
-}
 
 menu_head
 update_menu

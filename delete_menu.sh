@@ -24,15 +24,10 @@ delete_menu() {
 delete() {
     echo -en "\n    > Are you sure to delete Larets3d software? (${RED}Y${NORMAL}/${GREEN}N): "
     read yn
-
         case "${yn}" in
-    y)
+    y|Y|yes)
         delete_all;;   
-    Y)
-        delete_all;;
-    n)
-        choise "back" "delete_menu";;
-    N)
+    n|N|no)
         choise "back" "delete_menu";;
     *)
         choise "error" "delete_menu";;

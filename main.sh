@@ -54,14 +54,6 @@ update_menu() {
     esac
 }
 
-update() {
-    echo "update"
-}
-
-delete_menu() {
-    menu_head
-}
-
 ###### START ######
 main_screen() {
     menu_head
@@ -69,3 +61,4 @@ main_screen() {
 }
 
 main_screen
+
