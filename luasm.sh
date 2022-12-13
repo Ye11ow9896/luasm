@@ -22,7 +22,7 @@ luasm_update() {
 
 start_app() {
     if [ "$(check_connection)" -eq "1" ]; then
-        if [ "$(is_new_version ${LUASM_DIR})" -eq "0" ]; then
+        if [ "$(is_new_version ${LUASM_DIR})" -eq "1" ]; then
             luasm_update
         else
             go_to_screen main
