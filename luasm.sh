@@ -25,9 +25,11 @@ start_app() {
         if [ "$(is_new_version ${LUASM_DIR})" -eq "1" ]; then
             luasm_update
         else
+            clear
             go_to_screen main
         fi
     else
+        clear
         go_to_screen main
     fi
 }
