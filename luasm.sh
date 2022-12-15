@@ -8,6 +8,8 @@ luasm_update() {
         case "${yn}" in
     y|Y|yes)
         cd /${HOME}/${LUASM_DIR}
+        git stash
+        git stash clear
         git pull
         clear
         echo -en "     ${GREEN}LUASM software successfully updated! \n"

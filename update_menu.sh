@@ -66,6 +66,8 @@ update_software() {
         if [ -z $2 ]; then
             # update klipper and klipperScreen
             cd /${HOME}/$1
+            git stash
+            git stash clear
             git pull
         else 
             # update Fluidd
