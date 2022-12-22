@@ -44,7 +44,7 @@ update_app() {
             # all folders with apps are exists
             update_software ${KLIPPER_DIR}
             update_software ${KSCREEN_DIR}
-            update_software ${FLUIDD_REPO} ${FLUIDD_DIR}
+            update_software ${FLUIDD_DIR} ${FLUIDD_REPO}
             #clear
             echo -en "     ${GREEN}Larets3D software successfully updated! \n"
             go_to_screen main
@@ -75,11 +75,11 @@ update_software() {
                 rm -rf /${HOME}/temp;
             fi
             mkdir temp;
-            mkdir $2
+            mkdir $1
             cd temp;
-            git clone $1;
-            cp -r /${HOME}/temp/Fluidd/dist/* /${HOME}/$2
-            cp -r /${HOME}/temp/Fluidd/.git /${HOME}/$2
+            git clone $2;
+            cp -r /${HOME}/temp/Fluidd/dist/* /${HOME}/$1
+            cp -r /${HOME}/temp/Fluidd/.git /${HOME}/$1
             rm -rf /${HOME}/temp
         fi
     else 
