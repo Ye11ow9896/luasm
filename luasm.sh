@@ -36,7 +36,7 @@ start_app() {
     fi
 }
 
-#clear
-#menu_head
-#start_app
+clear
+menu_head
+start_app
 go_to_screen main
