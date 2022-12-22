@@ -39,7 +39,7 @@ update_app() {
     # check all folders
     if [ "$(is_folder_created ${KLIPPER_DIR})" -eq "1" ] && [ "$(is_folder_created ${KSCREEN_DIR})" -eq "1" ] && [ "$(is_folder_created ${FLUIDD_DIR})" -eq "1" ]
     then 
-        if [ "$(is_new_version ${KLIPPER_DIR})" -eq "1" ] && [ "$(is_new_version ${KSCREEN_DIR})" -eq "1" ] && [ "$(is_new_version ${FLUIDD_DIR})" -eq "1" ]
+        if [ "$(is_new_version ${KLIPPER_DIR})" -eq "1" ] || [ "$(is_new_version ${KSCREEN_DIR})" -eq "1" ] || [ "$(is_new_version ${FLUIDD_DIR})" -eq "1" ]
         then
             # all folders with apps are exists
             update_software ${KLIPPER_DIR}
@@ -61,7 +61,6 @@ update_app() {
 }
 
 update_software() {
-
     if [ "$(is_new_version $1)" -eq "1" ]; then
         if [ -z $2 ]; then
             # update klipper and klipperScreen
